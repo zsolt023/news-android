@@ -31,11 +31,19 @@ class MainActivity : AppCompatActivity() {
 
         viewModel.newsStream.applyIoScheduler().subscribe({ articles ->
             Timber.i("articles received: ${articles.size}")
+            binding.articleList.adapter = ArticleAdapter(data = articles) {
+                // TODO: implement click handling logic
+            }
         }, Timber::e).apply { disposableBag.add(this) }
     }
 
     override fun onStop() {
         super.onStop()
         disposableBag.clear()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        _binding = null
     }
 }
