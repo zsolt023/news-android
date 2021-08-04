@@ -4,7 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.zsolt.news.databinding.ActivitySplashBinding
-import com.zsolt.news.ui.MainActivity
+import com.zsolt.news.ui.main.MainActivity
 
 class SplashActivity : AppCompatActivity() {
 
