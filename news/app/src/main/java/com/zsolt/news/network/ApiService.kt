@@ -8,14 +8,14 @@ import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.converter.scalars.ScalarsConverterFactory
 import retrofit2.http.GET
-import retrofit2.http.Header
+import retrofit2.http.Query
 
 interface ApiService {
 
     @GET("v2/everything")
     fun getNews(
-        @Header("q") searchText: String? = null,
-        @Header("apiKey") apiKey: String = API_KEY,
+        @Query("q") searchText: String? = null,
+        @Query("apiKey") apiKey: String = API_KEY,
     ): Call<NewsResultDto>
 
     companion object {
