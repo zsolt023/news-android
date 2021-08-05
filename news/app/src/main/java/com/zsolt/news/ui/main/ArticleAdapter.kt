@@ -11,6 +11,7 @@ import com.zsolt.news.R
 import com.zsolt.news.databinding.ItemHighlightedArticleBinding
 import com.zsolt.news.databinding.ItemNormalArticleBinding
 import com.zsolt.news.internal.model.Article
+import timber.log.Timber
 
 class ArticleAdapter(
     private val data: List<Article>,
@@ -77,6 +78,7 @@ class ArticleAdapter(
                 }
             }
         }*/
+        Timber.d("highlighted article's data: ${item.title} - ${item.getPublishedAgo()} - ${item.urlToImage}")
         Picasso.get().load(item.urlToImage).into(holder.image)
         holder.title.text = item.title
         holder.publishedAgo.text = item.getPublishedAgo()

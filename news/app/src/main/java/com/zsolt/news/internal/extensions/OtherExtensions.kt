@@ -8,10 +8,10 @@ fun Long?.toTimeText(): String {
         val hours = it / 3600
         val mins = it.rem(3600) / 60
         val secs = it.rem(60)
-        if (hours > 0L) {
-            "${hours}H ${mins}M ${secs}S"
-        } else {
-            "${mins}M ${secs}S"
+        when {
+            hours > 0L -> "${hours}H ${mins}M"
+            hours < 24L -> "${mins}M ${secs}S"
+            else -> "1D+"
         }
     }
 }

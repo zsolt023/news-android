@@ -6,13 +6,13 @@ import java.util.*
 
 data class Article(
     val source: SourceDto,
-    val author: String,
+    val author: String?,
     val title: String,
-    val description: String,
+    val description: String?,
     val url: String,
     val urlToImage: String?,
     val publishedAt: Date?,
-    val content: String,
+    val content: String?,
 ) {
     fun getPublishedAgo(): String {
         return publishedAt?.let {

@@ -2,8 +2,13 @@ package com.zsolt.news.ui.main
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
+import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.zsolt.news.R
 import com.zsolt.news.databinding.ActivityMainBinding
 import com.zsolt.news.internal.extensions.applyIoScheduler
+import com.zsolt.news.internal.extensions.longSnackbar
 import io.reactivex.disposables.CompositeDisposable
 import org.koin.android.ext.android.inject
 import timber.log.Timber
@@ -25,8 +30,16 @@ class MainActivity : AppCompatActivity() {
     override fun onStart() {
         super.onStart()
 
+        ContextCompat.getDrawable(this, R.drawable.divider)?.let {
+            val divider = DividerItemDecoration(this, LinearLayoutManager.VERTICAL)
+            divider.setDrawable(it)
+            binding.articleList.addItemDecoration(divider)
+        }
+
         viewModel.errorStream.applyIoScheduler().subscribe({
-            Timber.e("Some error occurred: ${it.errorMsg()}")
+            val errorText = "Some error occurred: ${it.errorMsg()}"
+            Timber.e(errorText)
+            errorText.longSnackbar(binding.root)
         }, {}).apply { disposableBag.add(this) }
 
         viewModel.newsStream.applyIoScheduler().subscribe({ articles ->

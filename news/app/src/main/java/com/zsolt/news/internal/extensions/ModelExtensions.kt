@@ -20,6 +20,6 @@ fun ArticleDto.mapModel() = Article(
     description = description,
     url = url,
     urlToImage = urlToImage,
-    publishedAt = SimpleDateFormat("dd-MM-yyyy", Locale.US).parse(publishedAt),
+    publishedAt = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.US).parse(publishedAt),
     content = content,
 )
