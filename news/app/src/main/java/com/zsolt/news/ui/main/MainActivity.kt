@@ -32,6 +32,10 @@ class MainActivity : AppCompatActivity() {
     override fun onStart() {
         super.onStart()
 
+        binding.search.setOnClickListener {
+            // TODO: navigate to a new SearchActivity
+        }
+
         ContextCompat.getDrawable(this, R.drawable.divider)?.let {
             val divider = DividerItemDecoration(this, LinearLayoutManager.VERTICAL)
             divider.setDrawable(it)
