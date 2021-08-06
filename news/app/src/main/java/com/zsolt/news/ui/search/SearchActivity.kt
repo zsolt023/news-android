@@ -1,4 +1,4 @@
-package com.zsolt.news.ui.main
+package com.zsolt.news.ui.search
 
 import android.content.Intent
 import android.os.Bundle
@@ -7,26 +7,27 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.zsolt.news.R
-import com.zsolt.news.databinding.ActivityMainBinding
+import com.zsolt.news.databinding.ActivitySearchBinding
 import com.zsolt.news.internal.extensions.applyIoScheduler
 import com.zsolt.news.internal.extensions.longSnackbar
 import com.zsolt.news.ui.detail.ArticleActivity
-import com.zsolt.news.ui.search.SearchActivity
+import com.zsolt.news.ui.main.ArticleAdapter
+import com.zsolt.news.ui.util.hideSoftKeyboard
 import io.reactivex.disposables.CompositeDisposable
 import org.koin.android.ext.android.inject
 import timber.log.Timber
 
-class MainActivity : AppCompatActivity() {
+class SearchActivity: AppCompatActivity() {
 
-    private var _binding: ActivityMainBinding? = null
+    private var _binding: ActivitySearchBinding? = null
     private val binding get() = _binding!!
 
-    private val viewModel: MainViewModel by inject()
+    private val viewModel: SearchViewModel by inject()
     private val disposableBag = CompositeDisposable()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        _binding = ActivityMainBinding.inflate(layoutInflater)
+        _binding = ActivitySearchBinding.inflate(layoutInflater)
         setContentView(binding.root)
     }
 
@@ -34,7 +35,11 @@ class MainActivity : AppCompatActivity() {
         super.onStart()
 
         binding.buttonSearch.setOnClickListener {
-            startActivity(Intent(this, SearchActivity::class.java))
+            hideSoftKeyboard()
+            val text = binding.searchField.text.toString()
+            if (text.isNotBlank()) {
+                viewModel.refreshInput.onNext(text)
+            }
         }
 
         ContextCompat.getDrawable(this, R.drawable.divider)?.let {
@@ -57,15 +62,5 @@ class MainActivity : AppCompatActivity() {
                 startActivity(intent)
             }
         }, Timber::e).apply { disposableBag.add(this) }
-    }
-
-    override fun onStop() {
-        super.onStop()
-        disposableBag.clear()
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        _binding = null
     }
 }

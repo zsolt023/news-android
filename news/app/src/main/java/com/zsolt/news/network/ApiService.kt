@@ -14,7 +14,6 @@ interface ApiService {
 
     @GET("v2/everything")
     fun getNews(
-        @Query("country") countryCode: String,
         @Query("q") searchText: String? = null,
         @Query("from") fromDate: String? = null,
         @Query("to") toDate: String? = null,

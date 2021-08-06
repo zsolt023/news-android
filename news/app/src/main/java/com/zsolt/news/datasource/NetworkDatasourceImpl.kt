@@ -11,13 +11,7 @@ class NetworkDatasourceImpl(
     private val apiService: ApiService,
 ) : NetworkDatasource {
 
-    //val dateFormatter = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.US)
-
-    override fun getNews(searchText: String?): Maybe<NetworkResponse<Articles>> {
-        /*val now = Calendar.getInstance()
-        val toDate = dateFormatter.format(now.time)
-        now.add(Calendar.DATE, -1)
-        val fromDate = dateFormatter.format(now.time)*/
+    override fun getHeadlines(): Maybe<NetworkResponse<Articles>> {
         return apiService.getHeadlines(
             countryCode = "us",
         ).toMaybeCall { newsResultDto ->
@@ -25,4 +19,11 @@ class NetworkDatasourceImpl(
         }
     }
 
+    override fun getNews(searchText: String?): Maybe<NetworkResponse<Articles>> {
+        return apiService.getNews(
+            searchText = searchText,
+        ).toMaybeCall { newsResultDto ->
+            newsResultDto.mapModel()
+        }
+    }
 }

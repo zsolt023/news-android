@@ -2,4 +2,5 @@
     <string name="app_name">News</string>
     <string name="article.button.share">Share</string>
     <string name="article.button.full_article">Full article</string>
+    <string name="search.hint">Search</string>
 </resources>
