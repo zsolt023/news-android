@@ -5,6 +5,7 @@
       <map>
         <entry key="app/src/main/res/drawable/divider.xml" value="0.37552083333333336" />
         <entry key="app/src/main/res/drawable/ic_arrow_back.xml" value="0.21875" />
+        <entry key="app/src/main/res/font/libre_franklin.xml" value="0.2328125" />
         <entry key="app/src/main/res/layout/activity_article.xml" value="0.335" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.34782608695652173" />
         <entry key="app/src/main/res/layout/activity_splash.xml" value="0.34782608695652173" />
