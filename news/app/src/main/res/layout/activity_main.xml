@@ -8,9 +8,9 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/article_list"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView"
@@ -27,6 +27,7 @@
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:background="@color/white"
+            android:contentDescription="@string/search.hint"
             android:padding="5dp"
             android:scaleType="centerCrop"
             android:src="@drawable/ic_search" />
